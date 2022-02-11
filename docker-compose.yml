@@ -20,7 +20,7 @@ services:
   analytics:
     #image: 'analytics:latest'
     build:
-      context: ./analytics
+      context: ../noc/projects/analytics/
       dockerfile: Dockerfile
     restart: on-failure
     container_name: analytics
