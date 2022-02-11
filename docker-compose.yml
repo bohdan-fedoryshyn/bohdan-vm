@@ -16,6 +16,14 @@ services:
     restart: always
     networks:
       - mysql
+  adminer_container:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql_db_container
+    ports:
+      - 8181:8080
+    volumes:
+      - /home/ubuntu/bohdan-vm/mysql
 
   analytics:
     #image: 'analytics:latest'
@@ -89,6 +97,7 @@ services:
       #- '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
     # ports:
     #  - 9100:9100
+
 
 networks:
   mysql:
