@@ -15,7 +15,7 @@ services:
       - 0.0.0.0:3306:3306
     restart: always
     networks:
-      - backend
+      - mysql
 
   analytics:
     #image: 'analytics:latest'
@@ -26,6 +26,8 @@ services:
     container_name: analytics
     ports:
       - '8090:8080'
+    networks:
+      - analytics
 
   prometheus:
     image: prom/prometheus:latest
@@ -43,6 +45,10 @@ services:
     restart: always
     ports:
       - 9090:9090
+    networks:
+      - prometheus
+
+
 
   grafana:
     image: grafana/grafana:latest
@@ -50,6 +56,8 @@ services:
     restart: always
     ports:
       - 3000:3000
+    networks:
+      - grafana
 
   alertmanager:
     image: prom/alertmanager:latest
@@ -58,6 +66,9 @@ services:
       - 9093:9093
     volumes:
       - ./alertmanager/:/etc/alertmanager/
+
+    networks:
+      - alertmanager
     #restart: always
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
@@ -80,8 +91,18 @@ services:
     #  - 9100:9100
 
 networks:
-  backend:
+  mysql:
     driver: bridge
 
   analytics:
     driver: bridge
+
+  prometheus:
+    driver: bridge
+
+  grafana:
+    driver: bridge
+
+  alertmanager:
+    driver: bridge
+
