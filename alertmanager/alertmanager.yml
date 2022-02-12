@@ -15,6 +15,6 @@ route:
 
 receivers:
   - name: 'team'
-    hook_configs:
+    webhook_configs:
       - api_url: 'https://webhook.site/c7d0b562-79b8-490b-8efe-1c3ea9202b86'
     send_resolved: true
